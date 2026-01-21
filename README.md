@@ -1,4 +1,4 @@
-# mixed_precision_nqs
+# Mixed Precision Neural Quantum States
 
 This repository contains all the data and scripts necessary to reproduce the results from our paper on mixed precision neural quantum states. In the repository all the already trainend models are stored. Therefore it is also possible to skip the trining steps for to reproduce the figures. 
 
