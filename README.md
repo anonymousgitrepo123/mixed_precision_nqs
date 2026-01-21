@@ -2,14 +2,14 @@
 
 This repository contains all the data and scripts required to reproduce the results presented in our paper on mixed-precision neural quantum states. Pre-trained models are included, so it is possible to reproduce the figures without running the training procedures.
 
+## Reproducing Paper Figures
+
+All figures can be reproduced using the Jupyter notebooks located in the `Paper/Reproduce/` directory. Each notebook contains detailed instructions and visualization code. Follow the steps below for each figure.
+
 We recommend creating a dedicated virtual environment and installing the required Python packages using:
 ```bash
 pip install -r requirements.txt
 ```
-
-## Reproducing Paper Figures
-
-All figures can be reproduced using the Jupyter notebooks located in the `Paper/Reproduce/` directory. Each notebook contains detailed instructions and visualization code. Follow the steps below for each figure:
 
 ### Figure 1 Panel a
 
