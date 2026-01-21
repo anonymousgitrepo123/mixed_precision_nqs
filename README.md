@@ -3,9 +3,9 @@
 This repository contains all the data and scripts required to reproduce the results presented in our paper on mixed-precision neural quantum states. Pre-trained models are included, so it is possible to reproduce the figures without running the training procedures.
 
 We recommend creating a dedicated virtual environment and installing the required Python packages using:
-'''bash
+```bash
 pip install -r requirements.txt
-'''
+```
 
 ## Reproducing Paper Figures
 
