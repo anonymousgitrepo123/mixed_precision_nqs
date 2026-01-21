@@ -34,7 +34,7 @@ pip install -r requirements.txt
      python Script/LPSE/noisy_rbm_acceptance.py --L=16 --h=x
      ```
 2. The resulting data will be saved in `Data/LPSE/Noisy_rbm/Acceptance/`
-3. Open and run the notebook [Paper/Reproduce/figure_1_b.py](Paper/Reproduce/figure_1_c.py) to visualize the data
+3. Open and run the notebook [Paper/Reproduce/figure_1_c.py](Paper/Reproduce/figure_1_c.py) to visualize the data
 
 ### Figure 2
 
@@ -50,7 +50,7 @@ pip install -r requirements.txt
    ```bash
    python Script/LPSE/eps_fe.py --model='random'
    ```
-4. Open and run the notebook [Paper/Reproduce/figure_1_c.ipynb](Paper/Reproduce/figure_1_c.ipynb) to visualize the data
+4. Open and run the notebook [Paper/Reproduce/figure_2.ipynb](Paper/Reproduce/figure_2.ipynb) to visualize the data
 
 ### Figure 3
 
@@ -73,7 +73,31 @@ pip install -r requirements.txt
        --arch='ResCNN' \
        --arch_params='{"n_res_blocks": 4, "filters": 16, "kernel_shape": (3,3), "upcast_sums": False}'
    ```
-3. Open and run the notebook [Paper/Reproduce/figure_2.ipynb](Paper/Reproduce/figure_2.ipynb) to visualize the data
+3. Open and run the notebook [Paper/Reproduce/figure_3.ipynb](Paper/Reproduce/figure_3.ipynb) to visualize the data
+
+### Figure 3 NEW
+
+1. Train ResCNN models for each $d \in \{\text{None}, \text{f32}, \text{f16}, \text{bf16}\}$:
+   ```bash
+   python Script/LPSO/energy_minimization.py \
+       --n_dim=2 \
+       --lr=5e-3 \
+       --n_chains=$((2**10)) \
+       --n_samples=$((2**12)) \
+       --M=1000 \
+       --save_parameters=True \
+       --save_history=True \
+       --timeit=True \
+       --sampling_dtype=d \
+       --L=10 \
+       --model='TFIM' \
+       --model_params='{"J": 1, "h": 3.04438}' \
+       --chunk_size=$((2**11)) \
+       --arch='ResCNN' \
+       --arch_params='{"n_res_blocks": 4, "filters": 16, "kernel_shape": (3,3), "upcast_sums": False}'
+       --compute_sigma=True
+   ```
+3. Open and run the notebook [Paper/Reproduce/figure_3_new.ipynb](Paper/Reproduce/figure_3_new.ipynb) to visualize the data
 
 ### Figure 4
 
@@ -81,7 +105,7 @@ pip install -r requirements.txt
    ```bash
    python Script/GPU_test/linear_layer_grid.py
    ```
-3. Open and run the notebook [Paper/Reproduce/figure_3.ipynb](Paper/Reproduce/figure_3.ipynb)
+3. Open and run the notebook [Paper/Reproduce/figure_4.ipynb](Paper/Reproduce/figure_4.ipynb)
 
 Note: Results depend on the specific GPU used (this paper uses NVIDIA H100)
 
