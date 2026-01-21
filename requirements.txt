@@ -1,7 +1,10 @@
-netket==3.14.3
-matplotlib==3.9.2
-networkx==3.3
-pytest==8.3.3
-jax==0.4.35
+jax==0.5.3
+matplotlib==3.10.8
+netket==3.16.1
+numpy==2.4.1
 pandas==2.3.3
+pynvml==13.0.1
+rich==14.2.0
+scipy==1.17.0
+tqdm==4.67.1
 ipykernel==7.0.1

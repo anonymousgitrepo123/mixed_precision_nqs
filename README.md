@@ -1,6 +1,11 @@
 # Mixed Precision Neural Quantum States
 
-This repository contains all the data and scripts necessary to reproduce the results from our paper on mixed precision neural quantum states. In the repository all the already trainend models are stored. Therefore it is also possible to skip the trining steps for to reproduce the figures. 
+This repository contains all the data and scripts required to reproduce the results presented in our paper on mixed-precision neural quantum states. Pre-trained models are included, so it is possible to reproduce the figures without running the training procedures.
+
+We recommend creating a dedicated virtual environment and installing the required Python packages using:
+'''bash
+pip install -r requirements.txt
+'''
 
 ## Reproducing Paper Figures
 
