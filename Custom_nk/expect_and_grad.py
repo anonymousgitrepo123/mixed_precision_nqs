@@ -52,8 +52,6 @@ def _lp_expect_and_grad_jax(O_jax, sigmas, apply_fun_g, variables_g, apply_fun_e
     if O_loc_past is not None:
         std = jnp.sqrt(O_loc_past.variance)
         mean = O_loc_past.mean
-        # local_sum = clip_local_sum(local_sum, mean, std)
-        # local_sum = clip_roeland(local_sum, 10, sigmas.shape[-1])
 
     O_loc = statistics(local_sum)
     delta = 2 * (local_sum - O_loc.mean).conj() / n_samples
@@ -72,10 +70,6 @@ def expect_and_grad(O, sigmas, apply_fun, variables, O_loc_past=None, chunk_size
 
 def _expect_and_grad_jax(O_jax, sigmas, apply_fun, variables, chunk_size, O_loc_past):
     return _lp_expect_and_grad_jax(O_jax, sigmas, apply_fun, variables, apply_fun, variables, chunk_size, O_loc_past)
-
-@partial(jax.jit, static_argnums=(1, 2))
-def clip_roeland(energies, clip_val, system_size):
-    return jnp.clip(energies / system_size, min=-clip_val, max=clip_val) * system_size
 
 def clip_local_sum(local_sum, mean_past, std_past):
     return jnp.clip(local_sum, min=(mean_past - 5 * std_past), max=(mean_past + 5 * std_past))
