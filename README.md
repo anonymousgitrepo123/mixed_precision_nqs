@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 1. Execute sequentially all cells of the notebook [Paper/Reproduce/figure_1_a.ipynb](Paper/Reproduce/figure_1_a.ipynb)
 
-### Figure 2 Panle b
+### Figure 2 Panel b
 
 1. Use the following command to run the script and generate the figure
    ```bash
