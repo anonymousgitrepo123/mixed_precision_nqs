@@ -54,29 +54,6 @@ pip install -r requirements.txt
 
 ### Figure 3
 
-1. Train ResCNN models for each $h \in \{1, 3.04438, 5\}$ and $d \in \{\text{None}, \text{f32}, \text{f16}, \text{bf16}\}$:
-   ```bash
-   python Script/LPSO/energy_minimization.py \
-       --n_dim=2 \
-       --lr=5e-3 \
-       --n_chains=$((2**10)) \
-       --n_samples=$((2**12)) \
-       --M=1000 \
-       --save_parameters=True \
-       --save_history=True \
-       --timeit=True \
-       --sampling_dtype=d \
-       --L=10 \
-       --model='TFIM' \
-       --model_params='{"J": 1, "h": x}' \
-       --chunk_size=$((2**11)) \
-       --arch='ResCNN' \
-       --arch_params='{"n_res_blocks": 4, "filters": 16, "kernel_shape": (3,3), "upcast_sums": False}'
-   ```
-3. Open and run the notebook [Paper/Reproduce/figure_3.ipynb](Paper/Reproduce/figure_3.ipynb) to visualize the data
-
-### Figure 3 NEW
-
 1. Train ResCNN models for each $d \in \{\text{None}, \text{f32}, \text{f16}, \text{bf16}\}$:
    ```bash
    python Script/LPSO/energy_minimization.py \
@@ -97,7 +74,7 @@ pip install -r requirements.txt
        --arch_params='{"n_res_blocks": 4, "filters": 16, "kernel_shape": (3,3), "upcast_sums": False}'
        --compute_sigma=True
    ```
-3. Open and run the notebook [Paper/Reproduce/figure_3_new.ipynb](Paper/Reproduce/figure_3_new.ipynb) to visualize the data
+3. Open and run the notebook [Paper/Reproduce/figure_3.ipynb](Paper/Reproduce/figure_3.ipynb) to visualize the data
 
 ### Figure 4
 
