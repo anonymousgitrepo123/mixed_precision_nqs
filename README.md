@@ -19,7 +19,11 @@ pip install -r requirements.txt
 
 1. Use the following command to run the script and generate the figure
    ```bash
-   python Paper/Reproduce/figure_1_b.py
+   python Paper/Reproduce/figure_1_b.py --n_samples=2**18 --n=12 --n_seeds=10
+   ```
+   If this computation is too demanding, you can run the experiment using reduced parameter values:
+   ```bash
+   python Paper/Reproduce/figure_1_b.py --n_samples=2**14 --n=4 --n_seeds=1
    ```
 
 ### Figure 1 Panel c
