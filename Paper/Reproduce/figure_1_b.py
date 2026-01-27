@@ -24,8 +24,7 @@ from netket.utils.types import DType
 from netket.operator import DiscreteJaxOperator
 
 default_kernel_init = normal(stddev=0.1)
-N_SAMPLES = 2 ** 18
-
+import argparse
 
 class IndicatorZeroStateJax(DiscreteJaxOperator):
     """
@@ -227,11 +226,10 @@ def expect(obs, logpsi, x):
     return nk.stats.statistics(local_kernel)
 
 
-def get_evs(n, seed, sigma, obs_name):
+def get_evs(n, seed, sigma, obs_name, n_samples):
     dtype_ref = jnp.float64
     hilbert = nk.hilbert.Spin(s=0.5, N=n)
     n_therm = 2 ** 16
-    n_samples = N_SAMPLES
     model_ref = RBM(hilbert=hilbert, param_dtype=dtype_ref, alpha=1)
     sampler_ref = nk.sampler.MetropolisSampler(hilbert, rule=nk.sampler.rules.LocalRule(), n_chains_per_rank=2 ** 12)
     mc_state_ref = nk.vqs.MCState(sampler_ref, model_ref, n_samples=n_samples, seed=seed)
@@ -273,7 +271,7 @@ def get_evs(n, seed, sigma, obs_name):
     return acc_ref, acc_noisy, stats_ref.to_dict(), stats_noisy.to_dict()
 
 
-def main(n):
+def main(n, n_samples, n_seeds):
     plt.rcParams.update({
         "text.usetex": True,
         "font.family": "serif",
@@ -286,16 +284,16 @@ def main(n):
         "ytick.labelsize": 18,
     })
     # obs_name = 'indicator'
-    for obs_name in ["X", "zero", "even"]:
+    obs_names = ["X", "even"]
+    for obs_name in obs_names:
         sigma_list = np.logspace(-6, 1, 20)
-        n_seeds = 10
         seeds = [100 * i for i in range(n_seeds)]
         for i, sigma in enumerate(sigma_list):
             for j, seed in enumerate(seeds):
                 if not os.path.exists(f"./data_evs/{n}/{seed}/{obs_name}"):
                     os.makedirs(f"./data_evs/{n}/{seed}/{obs_name}")
                 if not os.path.exists(f"./data_evs/{n}/{seed}/{obs_name}/stats_noisy_{sigma:1.7f}.c"):
-                    out = get_evs(n=n, seed=seed, sigma=sigma, obs_name=obs_name)
+                    out = get_evs(n=n, seed=seed, sigma=sigma, obs_name=obs_name, n_samples=n_samples)
                     np.save(f"./data_evs/{n}/{seed}/{obs_name}/acc_ref_{sigma:1.7f}", out[0])
                     np.save(f"./data_evs/{n}/{seed}/{obs_name}/acc_noisy_{sigma:1.7f}", out[1])
                     with open(f"./data_evs/{n}/{seed}/{obs_name}/stats_ref_{sigma:1.7f}.c", 'wb') as f:
@@ -318,7 +316,6 @@ def main(n):
     alpha_spacing = np.linspace(0.5, cmap_val, n_seeds)
     color_map = {"X": reds, "zero": oranges, "even": purples}
     sampling_error ={}
-    obs_names = ["even","X"]
     label_map = {"even": "Even", "X": r"$X_1$"}
     for obs_name in obs_names:
         cmap = plt.get_cmap(color_map[obs_name])
@@ -394,4 +391,10 @@ def main(n):
     plt.show()
 
 if __name__ == '__main__':
-    main(n=12)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("n", default=4, type=int)
+    parser.add_argument("n_samples", default=2**14,type=int)
+    parser.add_argument("n_seeds", default=1, type=int)
+    args = parser.parse_args()
+
+    main(n=args.n, n_samples=args.n_samples, n_seeds=args.n_seeds)

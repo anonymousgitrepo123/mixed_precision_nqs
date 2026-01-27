@@ -2,6 +2,8 @@ import netket as nk
 import argparse
 import tqdm
 import numpy as np
+import os
+import pandas as pd
 
 import sys
 from pathlib import Path
@@ -75,4 +77,7 @@ for s in tqdm.tqdm(range(len(sigmas))):
     })
 params_str = get_params_string({"J": 1, "h": args.h})
 out_folder = f"{PROJECT_ROOT}Data/LPSE/Noisy_rbm/Acceptance/"
-create_or_append(results, out_folder, f"TFIM{params_str}_L{args.L}_{args.n_dim}dim.csv")
+out = out_folder + f"TFIM{params_str}_L{args.L}_{args.n_dim}dim.csv"
+os.makedirs(out_folder, exist_ok=True)
+df = pd.DataFrame(results)
+df.to_csv(out, index=False)

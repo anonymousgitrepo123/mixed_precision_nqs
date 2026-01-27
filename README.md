@@ -6,7 +6,7 @@ This repository contains all the data and scripts required to reproduce the resu
 
 All figures can be reproduced using the Jupyter notebooks located in the `Paper/Reproduce/` directory. Each notebook contains detailed instructions and visualization code. Follow the steps below for each figure.
 
-We recommend creating a dedicated virtual environment and installing the required Python packages using:
+We recommend creating a dedicated virtual environment with Python 3.12 and installing the required Python packages using:
 ```bash
 pip install -r requirements.txt
 ```
@@ -19,19 +19,19 @@ pip install -r requirements.txt
 
 1. Use the following command to run the script and generate the figure
    ```bash
-   python Script/Reproduce/figure_1_b.py
+   python Paper/Reproduce/figure_1_b.py
    ```
 
 ### Figure 1 Panel c
 
 1. For each value of $h \in \{0.5, 1.0, 1.5, \ldots, 9.5\}$:
-   - Train the RBM:
+   - Train the RBM (repeat this by changing h in --model_params):
      ```bash
-     python Script/energy_minimization.py --L=16 --model_params='{"J": 1, "h": x}'
+     python Script/energy_minimization.py --L=16 --model_params='{"J": 1, "h": 0.5}'
      ```
-   - Compute acceptance rates:
+   - Compute acceptance rates (repeat this by changing h in --h):
      ```bash
-     python Script/LPSE/noisy_rbm_acceptance.py --L=16 --h=x
+     python Script/LPSE/noisy_rbm_acceptance.py --L=16 --h=0.5
      ```
 2. The resulting data will be saved in `Data/LPSE/Noisy_rbm/Acceptance/`
 3. Open and run the notebook [Paper/Reproduce/figure_1_c.py](Paper/Reproduce/figure_1_c.py) to visualize the data
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 ### Figure 3
 
-1. Train ResCNN models for each $d \in \{\text{None}, \text{f32}, \text{f16}, \text{bf16}\}$:
+1. Train ResCNN models for each $d \in \{\text{None}, \text{f32}, \text{f16}, \text{bf16}\}$ by replacing d in --sampling_dtype=d:
    ```bash
    python Script/LPSO/energy_minimization.py \
        --n_dim=2 \
@@ -65,7 +65,7 @@ pip install -r requirements.txt
        --save_parameters=True \
        --save_history=True \
        --timeit=True \
-       --sampling_dtype=d \
+       --sampling_dtype=None \
        --L=10 \
        --model='TFIM' \
        --model_params='{"J": 1, "h": 3.04438}' \

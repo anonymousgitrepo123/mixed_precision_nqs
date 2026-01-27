@@ -5,9 +5,9 @@ plt.rcParams.update({
     "text.latex.preamble": r"\usepackage{amsmath, amsfonts, amssymb}",
     "font.family": "serif",
     "font.serif": ["Computer Modern Roman"],
-    "axes.labelsize": 18,
-    "font.size": 18,
-    "legend.fontsize": 12,
-    "xtick.labelsize": 18,
-    "ytick.labelsize": 18,
+    "axes.labelsize": 20,
+    "font.size": 20,
+    "legend.fontsize": 16,
+    "xtick.labelsize": 20, #18
+    "ytick.labelsize": 20,
 })
